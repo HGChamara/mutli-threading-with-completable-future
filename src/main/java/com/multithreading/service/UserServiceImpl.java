@@ -16,12 +16,14 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
     @Async
     @Override
     public CompletableFuture<List<User>> saveUser(MultipartFile file) throws Exception {
